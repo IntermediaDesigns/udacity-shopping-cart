@@ -32,9 +32,6 @@ After completing the functionality for your shopping cart, the resulting storefr
 
 ![image](https://github.com/IntermediaDesigns/shopping-cart/assets/139661024/19ecddb6-57f4-4112-b8c8-57acec6c3875)
 
-
-https://video.udacity-data.com/topher/2022/April/624d2d94_complete-store/complete-store.jpeg
-
 a complete store front with 3 products added to the cart
 Completed Storefront
 
