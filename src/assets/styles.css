@@ -139,13 +139,13 @@ button:hover {
 }
 
 .empty-btn {
-    margin-top: 1rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: flex-end;
 }
 
 .empty-btn button {
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.137);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.137);
 }

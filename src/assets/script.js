@@ -118,7 +118,7 @@ const cartTotal = () => {
   - amount is the money paid by customer
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
-  Hint: cartTotal function gives us cost of all the products in the cart  
+  Hint: cartTotal function gives us cost of all the products in the cart
 */
 
 const pay = (amount) => {
@@ -134,12 +134,17 @@ const emptyCart = () => {
     product.quantity = 0;
   });
   cart.length = 0;
-}
-
+};
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
-/* The following is for running unit tests. 
+// Features added:
+// - emptyCart function
+// - Updated CSS on the store checkout, cart, and products, including responsiveness for cart
+// - Added functions to clear the receipt after payment
+// - Added function to clear Cart Total after payment
+
+/* The following is for running unit tests.
    To fully complete this project, it is expected that all tests pass.
    Run the following command in terminal to run tests
    npm run test
@@ -171,3 +176,5 @@ module.exports = {
 // - Change/update the formatting of the store.
 // - Add a mock credit card form with form validation.
 // - Create a form for adding more products.
+
+
