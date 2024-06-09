@@ -37,6 +37,12 @@ const orange = {
 
 products.push(cherry, strawberry, orange);
 
+/* Images provided in /images folder. All images from Unsplash.com
+   - cherry.jpg by Mae Mu
+   - orange.jpg by Mae Mu
+   - strawberry.jpg by Allec Gomes
+*/
+
 /* Declare an empty array named cart to hold the items in the cart */
 
 const cart = [];
@@ -105,7 +111,7 @@ const removeProductFromCart = (productId) => {
   - cartTotal should return the total cost of the products in the cart
   Hint: price and quantity can be used to determine total cost
 */
-// Clear total amount after payment
+
 const cartTotal = () => {
   let total = 0;
   cart.forEach((product) => {
@@ -113,19 +119,6 @@ const cartTotal = () => {
   });
   return total;
 };
-
-/* Create a function named pay that takes in an amount as an argument
-  - amount is the money paid by customer
-  - pay will return a negative number if there is a remaining balance
-  - pay will return a positive number if money should be returned to customer
-  Hint: cartTotal function gives us cost of all the products in the cart
-*/
-
-const pay = (amount) => {
-  return amount - cartTotal();
-};
-
-// Clear total amount after payment
 
 /* Create a function called emptyCart that empties the products from the cart */
 
@@ -136,13 +129,122 @@ const emptyCart = () => {
   cart.length = 0;
 };
 
+/* Create a function named pay that takes in an amount as an argument
+  - amount is the money paid by customer
+  - pay will return a negative number if there is a remaining balance
+  - pay will return a positive number if money should be returned to customer
+  Hint: cartTotal function gives us cost of all the products in the cart
+*/
+
+const pay = (amount) => {
+  // Check if the cart is empty
+  if (cart.length === 0) {
+    // If the cart is empty, return the received amount because there's no cash to be returned
+    return amount;
+  } else {
+    // If the cart is not empty, subtract the cart total from the received amount
+    return amount - cartTotal();
+  }
+};
+
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
 // Features added:
-// - emptyCart function
+
 // - Updated CSS on the store checkout, cart, and products, including responsiveness for cart
-// - Added functions to clear the receipt after payment
+
 // - Added function to clear Cart Total after payment
+document.querySelector(".pay").addEventListener("click", (e) => {
+  document.querySelector(".cart-total").innerHTML = "";
+});
+
+/* Begin remove all items from cart */
+function dropCart() {
+  let shoppingCart = document.querySelector(".empty-btn");
+  let div = document.createElement("button");
+  div.classList.add("empty");
+  div.innerHTML = `Empty Cart`;
+  shoppingCart.append(div);
+}
+dropCart();
+
+document.querySelector(".empty-btn").addEventListener("click", (e) => {
+  if (e.target.classList.contains("empty")) {
+    emptyCart();
+    drawCart();
+    drawCheckout();
+    cartTotal();
+  }
+});
+
+/* End all items from cart */
+
+// Clear the summary, checkout, and cart when cash received is clicked
+function resetCheckout() {
+  clearPaySummary();
+  drawCart();
+  drawCheckout();
+  cartTotal();
+}
+
+
+// eventlistener when clicking .pay
+document.querySelector(".pay").addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let amount = parseFloat(document.querySelector(".received").value);
+  let cashReturn = pay(amount);
+
+  let paymentSummary = document.querySelector(".pay-summary");
+  let div = document.createElement("div");
+
+  if (cashReturn >= 0) {
+    div.innerHTML = `
+            <p>Cash Received: $${amount}</p>
+            <p>Cash Returned: $${cashReturn}</p>
+            <p>Thank you!</p>
+        `;
+    // emptyCart();
+  } else {
+    div.innerHTML = `
+            <p>Cash Received: $${amount}</p>
+            <p>Remaining Balance: $${Math.abs(cashReturn)}</p>
+            <p>Please pay additional amount.</p>
+        `;
+  }
+
+  paymentSummary.append(div);
+  // resetCheckout();
+});
+// clear checkout after add-to-cart button is clicked
+document.querySelector(".products-container").addEventListener("click", (e) => {
+  if (e.target.classList.contains("add-to-cart")) {
+    drawCheckout();
+    resetCheckout();
+    cartTotal();
+    drawCart();
+  }
+});
+
+// Function to clear the pay-summary
+function clearPaySummary() {
+  document.querySelector(".pay-summary").innerHTML = "";
+}
+
+// clear input field after pay button is clicked
+document.querySelector(".pay").addEventListener("click", (e) => {
+  document.querySelector(".received").value = "";
+});
+
+//  Add Empty Button to the cart
+// Select the h2 within the products-container
+let h2 = document.querySelector(".products-container h2");
+
+// Create a new div with the class empty-btn
+let div = '<div class="empty-btn"></div>';
+
+// Insert the new div after the h2 (end of the h2 element)
+h2.insertAdjacentHTML("afterend", div);
 
 /* The following is for running unit tests.
    To fully complete this project, it is expected that all tests pass.
@@ -160,21 +262,7 @@ module.exports = {
   cartTotal,
   pay,
   emptyCart,
+
   /* Uncomment the following line if completing the currency converter bonus */
   // currency
 };
-
-// ## [Optional] Add Extra Features
-
-// - Remove all items from the cart using an emptyCart function.
-
-// - Integrate a currency switcher to switch between USD, EUR, and YEN.
-// - Implement currency formatting to accomodate USD, EUR, and YEN.
-
-// Come back once you're familiar with the DOM API, HTML, and CSS and try the following:
-
-// - Change/update the formatting of the store.
-// - Add a mock credit card form with form validation.
-// - Create a form for adding more products.
-
-

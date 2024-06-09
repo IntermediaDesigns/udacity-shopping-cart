@@ -8,7 +8,7 @@ function drawProducts() {
     productItems += `
             <div data-productId='${element.productId}'>
                 <img src='${element.image}'>
-                <h3">${element.name}</h3>
+                <h3>${element.name}</h3>
                 <p>price: ${currencySymbol}${element.price}</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
@@ -28,17 +28,13 @@ function drawCart() {
 
     cartItems += `
             <div data-productId='${element.productId}'>
-            
-            <img src='${element.image}'>
-            <div class="cart-item">
-                <h3 style="text-wrap: wrap;">${element.name}</h3>
+                <h3>${element.name}</h3>
                 <p>price: ${currencySymbol}${element.price}</p>
                 <p>quantity: ${element.quantity}</p>
                 <p>total: ${currencySymbol}${itemTotal}</p>
                 <button class="qup">+</button>
                 <button class="qdown">-</button>
                 <button class="remove">remove</button>
-                </div>
             </div>
         `;
   });
@@ -113,9 +109,6 @@ document.querySelector(".pay").addEventListener("click", (e) => {
   let amount = document.querySelector(".received").value;
   amount *= 1;
 
-  // Clear input field after payment
-  document.querySelector(".received").value = "";
-
   // Set cashReturn to return value of pay()
   let cashReturn = pay(amount);
 
@@ -126,21 +119,17 @@ document.querySelector(".pay").addEventListener("click", (e) => {
   // Else request additional funds
   if (cashReturn >= 0) {
     div.innerHTML = `
-            <p>Cash Received: <span style="font-weight: bold; color: green;">${currencySymbol}${amount}</span></p>
-            <p>Cash Returned: <span style="font-weight: bold; color: black;">${currencySymbol}${cashReturn}</span></p>
+            <p>Cash Received: ${currencySymbol}${amount}</p>
+            <p>Cash Returned: ${currencySymbol}${cashReturn}</p>
             <p>Thank you!</p>
         `;
-    // clear cart after payment
-    emptyCart();
-    drawCart();
-    drawCheckout();
   } else {
     // reset cash field for next entry
     document.querySelector(".received").value = "";
     div.innerHTML = `
-            <p>Cash Received: <span style="font-weight: bold; color: green;"> ${currencySymbol}${amount}</span></p>
-           <p>Remaining Balance: <span style="font-weight: bold; color: red;">$ ${cashReturn}</span></p>
-            <p style="font-weight: bold; color: red;">Please pay additional amount.</p>
+            <p>Cash Received: ${currencySymbol}${amount}</p>
+            <p>Remaining Balance: ${cashReturn}$</p>
+            <p>Please pay additional amount.</p>
             <hr/>
         `;
   }
@@ -148,28 +137,24 @@ document.querySelector(".pay").addEventListener("click", (e) => {
   paymentSummary.append(div);
 });
 
-// Clear summary after payment when adding product to cart
-document.querySelector(".add-to-cart").addEventListener("click", (e) => {
-  document.querySelector(".pay-summary").innerHTML = "";
-});
-
+/* Standout suggestions */
 /* Begin remove all items from cart */
-function dropCart() {
-  let shoppingCart = document.querySelector(".empty-btn");
-  let div = document.createElement("button");
-  div.classList.add("empty");
-  div.innerHTML = `Empty Cart`;
-  shoppingCart.append(div);
-}
-dropCart();
+// function dropCart(){
+//     let shoppingCart = document.querySelector('.empty-btn');
+//     let div = document.createElement("button");
+//     div.classList.add("empty");
+//     div.innerHTML =`Empty Cart`;
+//     shoppingCart.append(div);
+// }
+// dropCart();
 
-document.querySelector(".empty-btn").addEventListener("click", (e) => {
-  if (e.target.classList.contains("empty")) {
-    emptyCart();
-    drawCart();
-    drawCheckout();
-  }
-});
+// document.querySelector('.empty-btn').addEventListener('click', (e) => {
+//     if (e.target.classList.contains('empty')){
+//         emptyCart();
+//         drawCart();
+//         drawCheckout();
+//     }
+// })
 /* End all items from cart */
 
 /* Begin currency converter */
@@ -203,17 +188,4 @@ document.querySelector(".empty-btn").addEventListener("click", (e) => {
 //     drawCheckout();
 // });
 /* End currency converter */
-
-document.getElementById("myForm").addEventListener("submit", function (event) {
-  // Prevent the form from submitting normally
-  event.preventDefault();
-
-  function clearInputFields() {
-    let inputs = document.querySelectorAll("#myForm input");
-    for (var i = 0; i < inputs.length; i++) {
-      inputs[i].value = "";
-    }
-  }
-
-  clearInputFields();
-});
+/* End standout suggestions */

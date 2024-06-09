@@ -57,50 +57,19 @@ p {
   border: 1px solid #ccc;
   margin: 1em;
   padding: 2em;
-  min-width: 432px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
+  width: 175px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
   border-radius: 5px;
 }
 
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-left: 1rem;
-  align-items: center;
-  text-wrap: nowrap;
-}
-
-.cart-items h3 {
+.cart > div h3 {
+  font-weight: 800;
   text-wrap: wrap;
-  width: 175px;
 }
 
 .cart > div img {
-  max-width: 200px;
-  max-height: auto;
+  max-width: 150px;
   height: auto;
-  display: block;
-  align-items: center;
-}
-
-@media screen and (max-width: 805px) {
-  .cart > div {
-    flex-direction: column;
-    min-width: auto;
-  }
-  .cart > div img {
-    max-width: auto;
-    max-height: auto;
-  }
-  .cart-items {
-    margin-left: 0;
-    text-wrap: wrap;
-  }
 }
 
 .checkout-container {
@@ -151,7 +120,3 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.137);
 }
 
-#myForm div {
-  display: flex;
-  flex-direction: column;
-}
