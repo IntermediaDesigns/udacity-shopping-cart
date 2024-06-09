@@ -24,7 +24,7 @@ Starter code
 
 The only files you need to view are found in the src folder.
 
-├── src │ ├── assets │ │ ├── front.js │ │ ├── script.js <-- where you will be working │ │ └── styles.css │ ├── images │ │ ├── cherry.jpg │ │ ├── orange.jpg │ │ └── strawberry.jpg │ └── index.html ├── tests │ └── script.test.js ├── package.json └── package-lock.json
+![image](https://github.com/IntermediaDesigns/shopping-cart/assets/139661024/d0012551-e0c6-47cb-95e5-f5c5c1e6959a)
 
 You won’t need to modify the HTML in index.html for this project to work. Nor will you need to adjust the front.js file. front.js includes code that uses something called the DOM API. This is what connects your code to the HTML. You don’t need to worry about it right now. Should you continue with front-end development, you’ll learn all about what this file is doing.
 
