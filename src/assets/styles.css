@@ -50,6 +50,7 @@ p {
 
 .products > div h3 {
   font-weight: 800;
+  text-wrap: wrap;
 }
 
 .cart > div {

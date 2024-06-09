@@ -8,7 +8,7 @@ function drawProducts() {
     productItems += `
             <div data-productId='${element.productId}'>
                 <img src='${element.image}'>
-                <h3 style="text-wrap: wrap;">${element.name}</h3>
+                <h3">${element.name}</h3>
                 <p>price: ${currencySymbol}${element.price}</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
@@ -152,7 +152,6 @@ document.querySelector(".pay").addEventListener("click", (e) => {
 document.querySelector(".add-to-cart").addEventListener("click", (e) => {
   document.querySelector(".pay-summary").innerHTML = "";
 });
-
 
 /* Begin remove all items from cart */
 function dropCart() {
