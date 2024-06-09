@@ -148,6 +148,12 @@ document.querySelector(".pay").addEventListener("click", (e) => {
   paymentSummary.append(div);
 });
 
+// Clear summary after payment when adding product to cart
+document.querySelector(".add-to-cart").addEventListener("click", (e) => {
+  document.querySelector(".pay-summary").innerHTML = "";
+});
+
+
 /* Begin remove all items from cart */
 function dropCart() {
   let shoppingCart = document.querySelector(".empty-btn");

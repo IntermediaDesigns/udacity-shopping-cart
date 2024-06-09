@@ -136,6 +136,7 @@ const emptyCart = () => {
   cart.length = 0;
 }
 
+
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
 /* The following is for running unit tests. 
