@@ -5,12 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "live-server --port=3000 src"
+    "start": "node scripts/dev-server.js"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
-    "jest": "^27.5.1",
-    "live-server": "^1.2.1"
+    "jest": "^30.4.2"
+  },
+  "overrides": {
+    "lodash": "4.18.0",
+    "decode-uri-component": "0.4.1",
+    "http-auth": "4.2.1",
+    "morgan": "1.10.1",
+    "on-headers": "1.1.0",
+    "uuid": "11.1.1"
   }
 }

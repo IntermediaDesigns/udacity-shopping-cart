@@ -153,98 +153,100 @@ const pay = (amount) => {
 
 // - Updated CSS on the store checkout, cart, and products, including responsiveness for cart
 
-// - Added function to clear Cart Total after payment
-document.querySelector(".pay").addEventListener("click", (e) => {
-  document.querySelector(".cart-total").innerHTML = "";
-});
+if (typeof document !== "undefined") {
+  // - Added function to clear Cart Total after payment
+  document.querySelector(".pay").addEventListener("click", (e) => {
+    document.querySelector(".cart-total").innerHTML = "";
+  });
 
-/* Begin remove all items from cart */
-function dropCart() {
-  let shoppingCart = document.querySelector(".empty-btn");
-  let div = document.createElement("button");
-  div.classList.add("empty");
-  div.innerHTML = `Empty Cart`;
-  shoppingCart.append(div);
-}
-dropCart();
+  /* Begin remove all items from cart */
+  function dropCart() {
+    let shoppingCart = document.querySelector(".empty-btn");
+    let div = document.createElement("button");
+    div.classList.add("empty");
+    div.innerHTML = `Empty Cart`;
+    shoppingCart.append(div);
+  }
+  dropCart();
 
-document.querySelector(".empty-btn").addEventListener("click", (e) => {
-  if (e.target.classList.contains("empty")) {
-    emptyCart();
+  document.querySelector(".empty-btn").addEventListener("click", (e) => {
+    if (e.target.classList.contains("empty")) {
+      emptyCart();
+      drawCart();
+      drawCheckout();
+      cartTotal();
+    }
+  });
+
+  /* End all items from cart */
+
+  // Clear the summary, checkout, and cart when cash received is clicked
+  function resetCheckout() {
+    clearPaySummary();
     drawCart();
     drawCheckout();
     cartTotal();
   }
-});
-
-/* End all items from cart */
-
-// Clear the summary, checkout, and cart when cash received is clicked
-function resetCheckout() {
-  clearPaySummary();
-  drawCart();
-  drawCheckout();
-  cartTotal();
-}
 
 
-// eventlistener when clicking .pay
-document.querySelector(".pay").addEventListener("click", (e) => {
-  e.preventDefault();
+  // eventlistener when clicking .pay
+  document.querySelector(".pay").addEventListener("click", (e) => {
+    e.preventDefault();
 
-  let amount = parseFloat(document.querySelector(".received").value);
-  let cashReturn = pay(amount);
+    let amount = parseFloat(document.querySelector(".received").value);
+    let cashReturn = pay(amount);
 
-  let paymentSummary = document.querySelector(".pay-summary");
-  let div = document.createElement("div");
+    let paymentSummary = document.querySelector(".pay-summary");
+    let div = document.createElement("div");
 
-  if (cashReturn >= 0) {
-    div.innerHTML = `
+    if (cashReturn >= 0) {
+      div.innerHTML = `
             <p>Cash Received: $${amount}</p>
             <p>Cash Returned: $${cashReturn}</p>
             <p>Thank you!</p>
         `;
-    // emptyCart();
-  } else {
-    div.innerHTML = `
+      // emptyCart();
+    } else {
+      div.innerHTML = `
             <p>Cash Received: $${amount}</p>
             <p>Remaining Balance: $${Math.abs(cashReturn)}</p>
             <p>Please pay additional amount.</p>
         `;
+    }
+
+    paymentSummary.append(div);
+    // resetCheckout();
+  });
+  // clear checkout after add-to-cart button is clicked
+  document.querySelector(".products-container").addEventListener("click", (e) => {
+    if (e.target.classList.contains("add-to-cart")) {
+      drawCheckout();
+      resetCheckout();
+      cartTotal();
+      drawCart();
+    }
+  });
+
+  // Function to clear the pay-summary
+  function clearPaySummary() {
+    document.querySelector(".pay-summary").innerHTML = "";
   }
 
-  paymentSummary.append(div);
-  // resetCheckout();
-});
-// clear checkout after add-to-cart button is clicked
-document.querySelector(".products-container").addEventListener("click", (e) => {
-  if (e.target.classList.contains("add-to-cart")) {
-    drawCheckout();
-    resetCheckout();
-    cartTotal();
-    drawCart();
-  }
-});
+  // clear input field after pay button is clicked
+  document.querySelector(".pay").addEventListener("click", (e) => {
+    document.querySelector(".received").value = "";
+  });
 
-// Function to clear the pay-summary
-function clearPaySummary() {
-  document.querySelector(".pay-summary").innerHTML = "";
+  //  Add Empty Button to the cart
+  // Select the h2 within the products-container
+  let h2 = document.querySelector(".products-container h2");
+
+  // Create a new div with the class empty-btn
+  let div = '<div class="empty-btn"></div>';
+
+  // Insert the new div after the h2 (end of the h2 element)
+  h2.insertAdjacentHTML("afterend", div);
 }
-
-// clear input field after pay button is clicked
-document.querySelector(".pay").addEventListener("click", (e) => {
-  document.querySelector(".received").value = "";
-});
-
-//  Add Empty Button to the cart
-// Select the h2 within the products-container
-let h2 = document.querySelector(".products-container h2");
-
-// Create a new div with the class empty-btn
-let div = '<div class="empty-btn"></div>';
-
-// Insert the new div after the h2 (end of the h2 element)
-h2.insertAdjacentHTML("afterend", div);
 
 /* The following is for running unit tests.
    To fully complete this project, it is expected that all tests pass.
